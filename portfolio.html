@@ -9,6 +9,7 @@
   <meta property="og:description" content="Backend Engineer building scalable distributed systems, resilient APIs, and cloud-native platforms." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/15867619?s=64" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,6 +17,7 @@
   <script>
     // Tailwind config
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
@@ -48,6 +50,13 @@
   </style>
   <script>
     // Dark mode with persistence
+    window.addEventListener('DOMContentLoaded', function() {
+      const isDark = document.documentElement.classList.contains('dark');
+      document.querySelectorAll('[aria-label="Toggle theme"]').forEach(btn => {
+      btn.querySelector('.sun-icon').style.display = isDark ? 'inline' : 'none';
+      btn.querySelector('.moon-icon').style.display = isDark ? 'none' : 'inline';
+      });
+    });
     const storedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
@@ -56,6 +65,11 @@
     function toggleTheme(){
       const isDark = document.documentElement.classList.toggle('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      // Update button icon immediately
+      document.querySelectorAll('[aria-label="Toggle theme"]').forEach(btn => {
+        btn.querySelector('.sun-icon').style.display = isDark ? 'inline' : 'none';
+        btn.querySelector('.moon-icon').style.display = isDark ? 'none' : 'inline';
+      });
     }
   </script>
 </head>
@@ -80,8 +94,8 @@
       </nav>
       <div class="flex items-center gap-2">
         <button onclick="toggleTheme()" aria-label="Toggle theme" class="rounded-2xl border border-slate-200 dark:border-slate-800 px-3 py-1.5 text-sm hover:shadow-soft">
-          <span class="hidden dark:inline">☀︎</span>
-          <span class="inline dark:hidden">☾</span>
+          <span class="sun-icon" style="display:none;">☀︎</span>
+          <span class="moon-icon" style="display:inline;">☾</span>
         </button>
         <a href="#contact" class="hidden md:inline-flex items-center gap-2 rounded-2xl bg-brand-600 text-white px-4 py-2 text-sm font-semibold hover:bg-brand-700 shadow-soft">Hire me</a>
       </div>
@@ -227,6 +241,52 @@
   </section>
 
   <!-- Projects -->
+  <section id="projects" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Projects</h2>
+        <a href="#contact" class="text-sm text-brand-700 dark:text-brand-300 hover:underline">Work with me →</a>
+      </div>
+
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <!-- GENAI REDDIT UPLOADER -->
+        <article class="project-card dark:border-slate-800 dark:bg-slate-900/60">
+          <div class="project-head">
+            <h3 class="project-title">GenAI Reddit Uploader</h3>
+            <span class="badge">Automation</span>
+          </div>
+          <p class="project-desc">Automated bot using Stable Diffusion XL for image generation with dynamic text; scheduled posting via GitHub Actions.</p>
+          <div class="project-tags">
+            <span>SDXL</span> | <span>Python</span> | <span>GitHub Actions</span>
+          </div>
+        </article>
+
+        <!-- PHOTOGRAM -->
+        <article class="project-card dark:border-slate-800 dark:bg-slate-900/60">
+          <div class="project-head">
+            <h3 class="project-title">Photogram — Social App</h3>
+            <span class="badge">Full‑Stack</span>
+          </div>
+          <p class="project-desc">Spring Boot + React app with JWT auth & profile management; deployed on Heroku.</p>
+          <div class="project-tags">
+            <span>Spring Boot</span> | <span>React</span> | <span>JWT</span> | <span>Heroku</span>
+          </div>
+        </article>
+
+        <!-- GRAPHLINK -->
+        <article class="project-card dark:border-slate-800 dark:bg-slate-900/60">
+          <div class="project-head">
+            <h3 class="project-title">GraphLink — Scalable Infra</h3>
+            <span class="badge">Platform</span>
+          </div>
+          <p class="project-desc">Event-driven microservices platform with service discovery, API gateway, Neo4J, Kafka, Docker, Kubernetes; automated via GitHub Actions.</p>
+          <div class="project-tags">
+            <span>Kafka</span> | <span>Neo4J</span> | <span>Docker</span> | <span>Kubernetes</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
   <section id="projects" class="py-16 md:py-24">
     <div class="max-w-6xl mx-auto px-4">
       <div class="flex items-end justify-between gap-4">
